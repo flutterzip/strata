@@ -2,8 +2,11 @@
 #
 # Two jobs, deliberately split: `checks` is the gate every change must pass
 # and runs in a minute on a Linux runner. `integration` boots an iOS
-# simulator, which costs a macOS runner and several minutes, so it runs on
-# the default branch and on demand rather than on every push to a branch.
+# simulator, which takes a macOS runner and about ten minutes, so it runs
+# only when started by hand (Actions > CI > Run workflow). Run the same
+# suites locally before a release:
+#   flutter drive --driver=test_driver/integration_test.dart \
+#     --target=integration_test/<suite>_test.dart -d <simulator>
 #
 # The integration suites were written but never wired up. Unwired tests rot:
 # `carousel_fling_test.dart` had been broken by the auth gate for some time
@@ -53,8 +56,8 @@ jobs:
 
   integration:
     name: integration (iOS simulator)
-    # Only where it is worth the macOS minutes.
-    if: github.event_name != 'pull_request'
+    # Manual only: started from the Actions tab, never on push or PR.
+    if: github.event_name == 'workflow_dispatch'
     runs-on: macos-15
     timeout-minutes: 45
     steps:

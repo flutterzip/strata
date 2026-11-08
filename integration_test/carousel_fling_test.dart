@@ -34,6 +34,12 @@ void main() {
 
   testWidgets('fling the carousel for motion capture', (tester) async {
     await tester.pumpWidget(const ProviderScope(child: StrataApp()));
+    // The splash waits on timers, not frames, so pumpAndSettle can return
+    // while it is still showing. Pump real frames until the shell is up.
+    final shell = find.byType(StrataNavBar);
+    for (var i = 0; i < 100 && shell.evaluate().isEmpty; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
     await tester.pumpAndSettle();
 
     // Past the auth gate and onto the shell. If this fails the seeded
@@ -45,6 +51,11 @@ void main() {
     // destination, so `find.text('Cards')` matches nothing until you are
     // already there.
     await tester.tap(find.byIcon(Icons.credit_card_outlined));
+    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 600));
+
+    // The Cards tab opens on the wallet stack; switch to the carousel.
+    await tester.tap(find.text('Carousel'));
     await tester.pumpAndSettle();
     await tester.pump(const Duration(milliseconds: 600));
 
