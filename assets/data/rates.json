@@ -1,0 +1,14 @@
+{
+  "_note": "Indicative demo rates. Everything is quoted against 'base', and a cross rate is rates[to]/rates[from]. 'feeBps' is basis points taken off the amount before conversion (50 bps = 0.50%); it is not charged when both sides are the same currency. 'asOf' is shown in the UI next to the word 'indicative' — never present a static table as a live rate.",
+  "asOf": "2026-11-07",
+  "base": "USD",
+  "feeBps": 50,
+  "rates": {
+    "USD": 1.0,
+    "EUR": 0.9172,
+    "GBP": 0.7865,
+    "NGN": 1588.4,
+    "JPY": 153.21,
+    "CAD": 1.3914
+  }
+}

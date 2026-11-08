@@ -1,0 +1,85 @@
+{
+  "_note": "kind drives the icon; one of payment, security, system. Ten entries on purpose: enough to prove the list scrolls, groups by age and holds a long body without breaking.",
+  "notifications": [
+    {
+      "id": "n_01",
+      "kind": "payment",
+      "title": "Payment received",
+      "body": "$240.00 from Harborview Studio landed on your Everyday card.",
+      "sentAt": "2026-11-07T08:12:00Z",
+      "read": false
+    },
+    {
+      "id": "n_02",
+      "kind": "security",
+      "title": "New sign-in from Lagos",
+      "body": "Your account was opened on a device we have not seen before. If this was you there is nothing to do. If it was not, change your password and sign out every other device from Profile, then contact support so we can freeze the card while we look into it.",
+      "sentAt": "2026-11-07T06:40:00Z",
+      "read": false
+    },
+    {
+      "id": "n_03",
+      "kind": "payment",
+      "title": "Travel card charged",
+      "body": "£18.40 at Caffe Mercato, London.",
+      "sentAt": "2026-11-06T19:05:00Z",
+      "read": false
+    },
+    {
+      "id": "n_04",
+      "kind": "system",
+      "title": "Statement ready",
+      "body": "Your October statement is available to download.",
+      "sentAt": "2026-11-06T07:00:00Z",
+      "read": true
+    },
+    {
+      "id": "n_05",
+      "kind": "payment",
+      "title": "Subscription renewed",
+      "body": "$11.99 to Northwind Audio on your Household card.",
+      "sentAt": "2026-11-05T22:30:00Z",
+      "read": false
+    },
+    {
+      "id": "n_06",
+      "kind": "security",
+      "title": "Password changed",
+      "body": "The password on your account was updated successfully.",
+      "sentAt": "2026-11-05T14:18:00Z",
+      "read": true
+    },
+    {
+      "id": "n_07",
+      "kind": "payment",
+      "title": "Refund settled",
+      "body": "$62.10 back from Ridgeline Outfitters, on the card used.",
+      "sentAt": "2026-11-04T11:02:00Z",
+      "read": true
+    },
+    {
+      "id": "n_08",
+      "kind": "system",
+      "title": "Spending summary",
+      "body": "You spent $203.98 last week, 12% less than the week before.",
+      "sentAt": "2026-11-03T09:00:00Z",
+      "read": true
+    },
+    {
+      "id": "n_09",
+      "kind": "payment",
+      "title": "Card top-up",
+      "body": "$500.00 added to your Everyday card from Savings.",
+      "sentAt": "2026-11-02T16:44:00Z",
+      "read": true
+    },
+    {
+      "id": "n_10",
+      "kind": "system",
+      "title": "Contactless limit raised",
+      "body": "Your contactless limit is now $150 per transaction.",
+      "sentAt": "2026-11-01T10:20:00Z",
+      "read": true
+    }
+  ]
+}

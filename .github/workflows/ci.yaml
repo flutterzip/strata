@@ -1,0 +1,96 @@
+# Strata CI.
+#
+# Two jobs, deliberately split: `checks` is the gate every change must pass
+# and runs in a minute on a Linux runner. `integration` boots an iOS
+# simulator, which costs a macOS runner and several minutes, so it runs on
+# the default branch and on demand rather than on every push to a branch.
+#
+# The integration suites were written but never wired up. Unwired tests rot:
+# `carousel_fling_test.dart` had been broken by the auth gate for some time
+# and nothing said so.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  # A newer push supersedes an in-flight run on the same ref.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: 3.38.1
+
+jobs:
+  checks:
+    name: analyze and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      # Deliberately no `dart format --set-exit-if-changed` gate. The
+      # existing tree does not match dart_style's output in 79 files, and a
+      # gate that fails on its first run is one people learn to ignore.
+      # `flutter analyze && flutter test` clean is this project's stated
+      # bar, so that is what is enforced.
+      - name: Analyze
+        run: flutter analyze --fatal-infos
+
+      - name: Test
+        run: flutter test --reporter=compact
+
+  integration:
+    name: integration (iOS simulator)
+    # Only where it is worth the macOS minutes.
+    if: github.event_name != 'pull_request'
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Boot a simulator
+        run: |
+          set -euo pipefail
+          # Whichever iPhone this runner image ships; pinning a model is how
+          # this breaks on the next image bump.
+          UDID=$(xcrun simctl list devices available --json \
+            | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];\
+print(next(x['udid'] for v in d.values() for x in v if 'iPhone' in x['name']))")
+          echo "SIM_UDID=$UDID" >> "$GITHUB_ENV"
+          xcrun simctl boot "$UDID"
+          xcrun simctl bootstatus "$UDID" -b
+
+      - name: Run the integration suites
+        run: |
+          set -euo pipefail
+          for suite in integration_test/*_test.dart; do
+            echo "::group::$suite"
+            # `flutter drive` uninstalls the app when it finishes, so each
+            # suite starts from a clean install — which is what
+            # persistence_test.dart needs in order to mean anything.
+            flutter drive \
+              --driver=test_driver/integration_test.dart \
+              --target="$suite" \
+              -d "$SIM_UDID"
+            echo "::endgroup::"
+          done

@@ -1,0 +1,53 @@
+{
+  "$schema": "one object per card; edit freely and hot restart to see changes. 'frozen' blocks every flow that moves money; 'spendLimitMinor' caps what can leave the card each calendar month and is compared against transactions. Left off, a card is active with no cap.",
+  "cards": [
+    {
+      "id": "c_forest",
+      "last4": "8152",
+      "brand": "mastercard",
+      "funding": "debit",
+      "holder": "OLYMPICSON",
+      "expiryMonth": 7,
+      "expiryYear": 2029,
+      "nickname": "Everyday",
+      "skin": "forest",
+      "balanceMinor": 2409267,
+      "currency": "USD",
+      "artwork": null,
+      "frozen": false,
+      "spendLimitMinor": null
+    },
+    {
+      "id": "c_moss",
+      "last4": "4410",
+      "brand": "visa",
+      "funding": "virtualDebit",
+      "holder": "OLYMPICSON",
+      "expiryMonth": 11,
+      "expiryYear": 2028,
+      "nickname": "Travel",
+      "skin": "moss",
+      "balanceMinor": 506254,
+      "currency": "EUR",
+      "artwork": null,
+      "frozen": false,
+      "spendLimitMinor": null
+    },
+    {
+      "id": "c_sage",
+      "last4": "7731",
+      "brand": "visa",
+      "funding": "credit",
+      "holder": "OLYMPICSON",
+      "expiryMonth": 3,
+      "expiryYear": 2030,
+      "nickname": "Household",
+      "skin": "sage",
+      "balanceMinor": 118940,
+      "currency": "USD",
+      "artwork": null,
+      "frozen": false,
+      "spendLimitMinor": 80000
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "_note": "People you can send to. A recipient is matched by handle or email, so both must be present and unique. 'verified' means the account has been confirmed — leave one unverified so that state is reachable in the demo. 'avatar' is a MediaRef; null draws initials, or drop a file in assets/images/avatars/ and reference it as asset:avatars/<file>. 'lastUsedAt' orders the list; null means never used.",
+  "recipients": [
+    {
+      "id": "r_mensah",
+      "name": "Akosua Mensah",
+      "handle": "@akosua",
+      "email": "akosua.mensah@example.com",
+      "verified": true,
+      "avatar": null,
+      "lastUsedAt": "2026-11-05T09:18:00Z"
+    },
+    {
+      "id": "r_harborview",
+      "name": "Harborview Studio",
+      "handle": "@harborview",
+      "email": "billing@harborview.example",
+      "verified": true,
+      "avatar": null,
+      "lastUsedAt": "2026-11-03T14:02:00Z"
+    },
+    {
+      "id": "r_okafor",
+      "name": "Jide Okafor",
+      "handle": "@jide",
+      "email": "jide.okafor@example.com",
+      "verified": true,
+      "avatar": null,
+      "lastUsedAt": "2026-10-29T15:50:00Z"
+    },
+    {
+      "id": "r_haddad",
+      "name": "Lina Haddad",
+      "handle": "@lina",
+      "email": "lina@haddadstudio.example",
+      "verified": true,
+      "avatar": null,
+      "lastUsedAt": "2026-10-17T11:30:00Z"
+    },
+    {
+      "id": "r_novak",
+      "name": "Petr Novak",
+      "handle": "@petr",
+      "email": "p.novak@example.net",
+      "verified": false,
+      "avatar": null,
+      "lastUsedAt": null
+    },
+    {
+      "id": "r_ibarra",
+      "name": "Sofia Ibarra",
+      "handle": "@sofia",
+      "email": "sofia.ibarra@example.org",
+      "verified": true,
+      "avatar": null,
+      "lastUsedAt": null
+    }
+  ]
+}
