@@ -74,8 +74,7 @@ jobs:
           # Whichever iPhone this runner image ships; pinning a model is how
           # this breaks on the next image bump.
           UDID=$(xcrun simctl list devices available --json \
-            | python3 -c "import json,sys;d=json.load(sys.stdin)['devices'];\
-print(next(x['udid'] for v in d.values() for x in v if 'iPhone' in x['name']))")
+            | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; print(next(x['udid'] for v in d.values() for x in v if 'iPhone' in x['name']))")
           echo "SIM_UDID=$UDID" >> "$GITHUB_ENV"
           xcrun simctl boot "$UDID"
           xcrun simctl bootstatus "$UDID" -b
